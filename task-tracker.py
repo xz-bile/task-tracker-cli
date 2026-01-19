@@ -1,6 +1,8 @@
 import sys
 import json
 import os
+import time
+from datetime import datetime
 
 # 定义存储文件名
 DB_FILE = 'tasks.json'
@@ -22,10 +24,13 @@ def save_tasks(tasks):
 # 核心功能：添加任务
 def add_task(description):
     tasks = load_tasks()
+    new_id=(int)(time.time())    
     new_task = {
-        "id": len(tasks) + 1,
+        "id":new_id,
         "description": description,
-        "status": "todo"
+        "status": "todo",
+        "createdAt": datetime.now().isoformat(),
+        "updatedAt": datetime.now().isoformat()
     }
     tasks.append(new_task)
     save_tasks(tasks)
